@@ -14,15 +14,15 @@ app.use(express.json());
 // API Routes
 app.use("/api/campaigns", require("./routes/campaignRoutes"));
 
-// Serve frontend static files
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-// Catch-all route to serve index.html for any other frontend request
+// Catch-all route to serve static frontend index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
-// Connect to MongoDB Atlas & Start Server
+// Connect to MongoDB & Start Server
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -31,4 +31,6 @@ mongoose
       console.log(`Server is running on port ${PORT}`);
     });
   })
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err);
+  });
