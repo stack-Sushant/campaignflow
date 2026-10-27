@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampaignFlow - Modern Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts for Modern Typography -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span class="logo-icon">📊</span>
+        <h1>Campaign<span>Flow</span></h1>
+      </div>
+      <div class="user-profile">
+        <div class="avatar">PV</div>
+        <div class="user-info">
+          <span class="name">Priya Verma</span>
+          <span class="role">Marketing Lead</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Layout -->
+    <main class="dashboard-container">
+      <!-- Left Column: Add Campaign Form -->
+      <aside class="sidebar-form">
+        <div class="card">
+          <h3>Create New Campaign</h3>
+          <p class="card-desc">Launch a new marketing initiative</p>
+
+          <form id="campaignForm">
+            <div class="form-group">
+              <label>Campaign Name</label>
+              <input
+                type="text"
+                id="campaignName"
+                placeholder="e.g., Diwali Festive Promo"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Client Name</label>
+              <input
+                type="text"
+                id="clientName"
+                placeholder="e.g., Aarav Sharma"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Budget (₹)</label>
+              <input
+                type="number"
+                id="budget"
+                placeholder="e.g., 75000"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Status</label>
+              <select id="status">
+                <option value="Pending">⏳ Pending</option>
+                <option value="Active">🚀 Active</option>
+                <option value="Completed">✅ Completed</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary">Launch Campaign</button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Right Column: Campaign Analytics & Table -->
+      <section class="main-content">
+        <div class="card full-height">
+          <div class="card-header">
+            <div>
+              <h3>Active Campaigns</h3>
+              <p class="card-desc">Manage and monitor all running campaigns</p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign Name</th>
+                  <th>Client</th>
+                  <th>Budget</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="campaignTableBody">
+                <!-- Dynamically populated rows will appear here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
