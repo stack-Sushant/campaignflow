@@ -17,9 +17,9 @@ app.use("/api/campaigns", require("./routes/campaignRoutes"));
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-// Catch-all route to serve static frontend index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+// Catch-all route using regex matching (compatible with newer Express/path-to-regexp)
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
 });
 
 // Connect to MongoDB & Start Server
