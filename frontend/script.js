@@ -1,5 +1,9 @@
-const API_URL = "http://localhost:5000/api/campaigns";
-
+// Automatically switches between production server and local development
+const API_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000/api/campaigns"
+    : "/api/campaigns";
 const campaignForm = document.getElementById("campaignForm");
 const campaignTableBody = document.getElementById("campaignTableBody");
 
