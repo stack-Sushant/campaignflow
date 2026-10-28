@@ -42,3 +42,18 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+// Update campaign status
+router.patch('/:id', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const updatedCampaign = await Campaign.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+    res.json(updatedCampaign);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update status" });
+  }
+});

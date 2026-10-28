@@ -26,13 +26,44 @@ async function fetchCampaigns() {
         <td><strong>${campaign.campaignName}</strong></td>
         <td>${campaign.clientName}</td>
         <td>₹${campaign.budget.toLocaleString("en-IN")}</td>
-        <td><span class="badge ${campaign.status}">${campaign.status}</span></td>
+        <td>
+          <span class="badge ${campaign.status}" style="cursor: pointer;" onclick="toggleStatus('${campaign._id}', '${campaign.status}')" title="Click to change status">
+            ${campaign.status}
+          </span>
+        </td>
         <td><button class="delete-btn" onclick="deleteCampaign('${campaign._id}')">Delete</button></td>
       `;
       campaignTableBody.appendChild(row);
     });
   } catch (error) {
     console.error("Error fetching campaigns:", error);
+  }
+}
+
+// Function to cycle and update campaign status
+async function toggleStatus(id, currentStatus) {
+  const statusCycle = {
+    Active: "Paused",
+    Paused: "Completed",
+    Completed: "Active",
+  };
+
+  const newStatus = statusCycle[currentStatus] || "Active";
+
+  try {
+    const res = await fetch(`${API_URL}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
+    });
+
+    if (res.ok) {
+      fetchCampaigns(); // Refresh table to reflect new status
+    } else {
+      alert("Failed to update status");
+    }
+  } catch (error) {
+    console.error("Error updating status:", error);
   }
 }
 

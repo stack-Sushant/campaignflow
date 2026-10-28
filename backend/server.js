@@ -34,3 +34,30 @@ mongoose
   .catch((err) => {
     console.error("MongoDB Connection Error:", err);
   });
+// Function to update campaign status
+async function toggleStatus(id, currentStatus) {
+  // Cycle statuses: Active -> Paused -> Completed -> Active
+  const statusCycle = {
+    'Active': 'Paused',
+    'Paused': 'Completed',
+    'Completed': 'Active'
+  };
+  
+  const newStatus = statusCycle[currentStatus] || 'Active';
+
+  try {
+    const res = await fetch(`${API_URL}/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (res.ok) {
+      fetchCampaigns(); // Refresh list to display updated status UI
+    } else {
+      console.error('Failed to update status');
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+  }
+}
